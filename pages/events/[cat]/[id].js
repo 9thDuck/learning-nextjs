@@ -31,6 +31,7 @@ const SingleEventPage = ({ eventData }) => {
     setMsg("");
     timeout = null;
    }, 3000);
+   setEmail("");
   }
 
   return () => {
