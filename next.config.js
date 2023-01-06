@@ -11,6 +11,10 @@ const nextConfig = {
     protocol: "https",
     hostname: "wembleypark.com",
    },
+   {
+    protocol: "https",
+    hostname: "tb-lb.sb-cd.com",
+   },
   ],
  },
 };

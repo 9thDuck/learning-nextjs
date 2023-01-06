@@ -1,6 +1,6 @@
 const AboutUsPage = () => {
  return (
-  <>
+  <div>
    <h1>About Us page</h1>
    <p>
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate minima
@@ -12,15 +12,10 @@ const AboutUsPage = () => {
     provident ducimus? Quam, dolore perspiciatis. Corrupti, voluptatem? Ratione
     officia possimus maxime, consectetur nulla tenetur eaque sequi, dolorum quos
     aperiam itaque necessitatibus, veniam eius nihil ea vero eos cupiditate
-    odit! Distinctio, nemo dolores. Libero delectus illum, accusamus aut ab
-    corporis minus aliquid dolorum esse eos iusto non quae eius expedita velit
-    iste aliquam labore veritatis. Ipsam, in. Debitis itaque iusto distinctio
-    laborum porro? Quidem nam, similique maxime voluptas nisi consectetur
-    reprehenderit eveniet nemo tempora saepe est sunt dignissimos nihil, modi
-    harum illo dicta totam quam cum eius, vero aliquid molestias. Neque,
-    adipisci quaerat.
+    odit! Distinctio, nemo dolores.
    </p>
-  </>
+   <h2>Distinctio Laborum</h2>
+  </div>
  );
 };
 
