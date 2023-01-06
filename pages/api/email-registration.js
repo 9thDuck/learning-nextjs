@@ -34,15 +34,13 @@ const handler = async (req, res) => {
    if (!allEvents) {
     return res.status(404).json({ msg: `Your data is gone.`, success: false });
    }
-
+   let duplicateEmailSupplied = false;
    const newAllEvents = allEvents.map((ev) => {
     const { id, emails_registered } = ev;
     if (id === eventId) {
      if (emails_registered.includes(email)) {
-      return res.status(401).json({
-       msg: `This email has already been registered.`,
-       success: false,
-      });
+      duplicateEmailSupplied = true;
+      return ev;
      }
      // emails_registered.push(email);
      // return { ...ev, emails_registered };
@@ -50,6 +48,13 @@ const handler = async (req, res) => {
     }
     return ev;
    });
+   if (duplicateEmailSupplied) {
+    return res.status(409).json({
+     msg: `This email has already been registered.`,
+     success: false,
+    });
+   }
+
    // console.log(fileData);
 
    fileData.allEvents = newAllEvents;

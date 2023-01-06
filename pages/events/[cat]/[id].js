@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
@@ -24,6 +24,22 @@ const SingleEventPage = ({ eventData }) => {
  const [msg, setMsg] = useState("");
  const router = useRouter();
 
+ useEffect(() => {
+  let timeout = null;
+  if (msg?.length) {
+   timeout = setTimeout(() => {
+    setMsg("");
+    timeout = null;
+   }, 3000);
+  }
+
+  return () => {
+   if (timeout) {
+    clearTimeout(timeout);
+   }
+  };
+ }, [msg]);
+
  const onSubmit = async (e) => {
   e.preventDefault();
   const eventId = router?.query.id;
@@ -31,7 +47,11 @@ const SingleEventPage = ({ eventData }) => {
    /^[a-zA-Z0-9. !#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
   if (!email.match(validEmailRegex)) {
-   setMsg("Please enter a correct email address.");
+   setMsg((msg) => {
+    setTimeout(() => setMsg(""), 5000);
+    return "Please enter a correct email address.";
+   });
+   return;
   }
   try {
    const response = await fetch("/api/email-registration", {
@@ -39,9 +59,18 @@ const SingleEventPage = ({ eventData }) => {
     "Content-Type": "application/json",
     body: JSON.stringify({ email, eventId }),
    });
-   if (!response.ok) throw new Error(`Error: ${response.status} status.`);
    const data = await response.json();
+   // if (!response.ok) throw new Error({ data });
+   const { msg } = data;
+   setMsg((prevState) => {
+    setTimeout(() => setMsg(""), 3000);
+    return msg;
+   });
   } catch (error) {
+   const { msg } = error;
+
+   // setMsg(msg);
+
    console.log("ERROR", error);
   }
  };
